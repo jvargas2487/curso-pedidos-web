@@ -19,14 +19,14 @@ public class ClientesService
         Cliente? cliente = BuscarPorId(id);
         if (cliente == null) return "";
         string rut = cliente.Rut.Replace(".", "").Replace(" ", "").ToUpper();
-        string zona = "";
-        if (cliente.Region == "RM") zona = "Zona centro";
-        else if (cliente.Region == "V") zona = "Zona centro";
-        else if (cliente.Region == "VIII") zona = "Zona sur";
-        else if (cliente.Region == "II") zona = "Zona norte";
-        else zona = "Sin zona";
-        string estado = "";
-        if (cliente.Activo == true) estado = "Activo"; else estado = "Inactivo";
+        string zona = cliente.Region switch
+        {
+            "RM" or "V" => "Zona centro",
+            "VIII" => "Zona sur",
+            "II" => "Zona norte",
+            _ => "Sin zona"
+        };
+        string estado = cliente.Activo ? "Activo" : "Inactivo";
         return cliente.Nombre + " | " + rut + " | " + zona + " | " + estado;
     }
 
@@ -34,8 +34,7 @@ public class ClientesService
     public bool EstaActivo(string id)
     {
         Cliente? cliente = BuscarPorId(id);
-        if (cliente == null) return false;
-        if (cliente.Activo == true) return true; else return false;
+        return cliente != null && cliente.Activo;
     }
 
     // el primer cliente con ese id exacto, o null si no existe
