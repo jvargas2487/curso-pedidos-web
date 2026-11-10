@@ -16,11 +16,7 @@ public class ClientesService
     // ficha del cliente para la pantalla
     public string ObtenerFicha(string id)
     {
-        Cliente? cliente = null;
-        for (int i = 0; i < _clientes.Count; i++)
-        {
-            if (_clientes[i].Id == id) { cliente = _clientes[i]; break; }
-        }
+        Cliente? cliente = BuscarPorId(id);
         if (cliente == null) return "";
         string rut = cliente.Rut.Replace(".", "").Replace(" ", "").ToUpper();
         string zona = "";
@@ -37,12 +33,11 @@ public class ClientesService
     // si existe y está activo
     public bool EstaActivo(string id)
     {
-        Cliente? cliente = null;
-        for (int i = 0; i < _clientes.Count; i++)
-        {
-            if (_clientes[i].Id == id) { cliente = _clientes[i]; break; }
-        }
+        Cliente? cliente = BuscarPorId(id);
         if (cliente == null) return false;
         if (cliente.Activo == true) return true; else return false;
     }
+
+    // el primer cliente con ese id exacto, o null si no existe
+    private Cliente? BuscarPorId(string id) => _clientes.FirstOrDefault(c => c.Id == id);
 }
