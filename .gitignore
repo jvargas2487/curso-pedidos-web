@@ -1,0 +1,25 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+TestResults/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Secretos: nunca al repo
+.env
+*.pem
+
+# Visual Studio
+.vs/
+
+# Material local del curso (no se versiona)
+*.pdf
+plan-taller-unidad-3.md
