@@ -1,9 +1,13 @@
+using PedidosWeb.Core.Detalles;
+using PedidosWeb.Core.Lineas;
 using PedidosWeb.Core.Pedidos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IPedidoRepositorio, PedidoRepositorioEnMemoria>();
 builder.Services.AddSingleton<ListadoPedidosServicio>();
+builder.Services.AddSingleton<ILineaPedidoRepositorio, LineaPedidoRepositorioEnMemoria>();
+builder.Services.AddSingleton<DetallePedidoServicio>();
 
 var app = builder.Build();
 
@@ -14,6 +18,12 @@ app.MapGet("/salud", () => Results.Ok(new { estado = "ok" }));
 app.MapGet("/api/pedidos/{id:int}", (int id, IPedidoRepositorio repositorio) =>
     repositorio.ObtenerPorId(id) is { } pedido
         ? Results.Ok(pedido)
+        : Results.NotFound());
+
+// HU-02 · Detalle de un pedido con cliente, líneas y total (specs/HU-02-detalle-pedido/spec.md).
+app.MapGet("/api/pedidos/{id:int}/detalle", (int id, DetallePedidoServicio servicio) =>
+    servicio.Obtener(id) is { } detalle
+        ? Results.Ok(detalle)
         : Results.NotFound());
 
 // HU-01 · Listar pedidos con filtros (specs/HU-01-listar-pedidos/spec.md).
