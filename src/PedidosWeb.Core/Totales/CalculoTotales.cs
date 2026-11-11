@@ -71,6 +71,6 @@ public static class CalculoTotales
             ? Redondear(fleteBase * RecargoFleteRegionesExtremas)
             : Redondear(fleteBase);
 
-    // Igual al legado (Trunc(x + 0.49)): un .50 baja al entero inferior.
-    private static decimal Redondear(decimal valor) => Math.Floor(valor + 0.49m);
+    // R05: el legado usaba Trunc(x + 0.49) y el .50 bajaba; ahora sube al entero superior.
+    private static decimal Redondear(decimal valor) => Math.Round(valor, 0, MidpointRounding.AwayFromZero);
 }
