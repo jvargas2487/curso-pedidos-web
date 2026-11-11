@@ -7,7 +7,7 @@
 - **Por qué:** el redondeo «al peso» comercial y tributario lleva el `,50` hacia arriba; el legado cobra o descuenta un peso distinto en cada borde `,50`.
 - **Casos del golden master que cambian:** 13 de 60, por 1 o 2 pesos cada uno: casos 2, 6, 8, 18, 21, 23, 25, 27, 36, 37, 42, 46 y 54 (folios 1002, 1006, 1008, 1018, 1021, 1023, 1025, 1027, 1036, 1037, 1042, 1046 y 1054). Cambia el flete (+1) en 9 casos, el IVA en 4 y el descuento (+1) en 2; el total baja en los casos 6 y 25, porque un descuento mayor reduce el neto.
 - **Suma de la columna total:** 58.202.135 → 58.202.144 (+9).
-- **Commit:** `fix(totales): corrige R05, el redondeo sube el .50 (13 casos del golden master)`, separado del commit «igual al legado».
+- **Commit:** `fix(totales): corrige R05 y completa la documentación de migración (U5)`, separado del commit «igual al legado».
 - **Convivencia:** mientras conviven ambos sistemas, el negocio debe conciliar diferencias de 1 o 2 pesos por pedido entre lo que graba el legado y lo que calcula el portal; son los 13 casos de arriba y cualquier otro pedido con un `,50` en descuento, flete o IVA.
 
 ## H1 · Umbrales de descuento distintos entre pantalla y grabado (HALLAZGO, NO CORREGIDO)
