@@ -1,0 +1,39 @@
+# Revisión automática de PR con Claude, con las reglas de REVIEW.md leídas desde main.
+# Corre al abrir, reabrir o marcar listo el PR (no en cada push, para cuidar la cuota).
+# Requiere el secreto CLAUDE_CODE_OAUTH_TOKEN de la U6. El token NUNCA va en este archivo.
+name: Claude Review
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  revisar:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Permisos mínimos: lee el código y comenta en el PR. No escribe código.
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Descargar el código con el historial
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Revisar el PR
+        uses: anthropics/claude-code-action@4fa93a88de49bbef68b10eb15aabedf28ca0e1ed # v1.0.271
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Revisa el PR #${{ github.event.pull_request.number }} de ${{ github.repository }}.
+            Lee las reglas desde main, no desde la rama: `git show origin/main:AGENTS.md` y `git show origin/main:REVIEW.md`.
+            Revisa solo el cambio (`git diff origin/main...HEAD`) con REVIEW.md: qué es Importante, revisar siempre,
+            no reportar y el tope de hallazgos. Comenta en español, con archivo:línea.
+          claude_args: '--max-turns 8 --allowedTools "Read,Grep,Glob,Bash(git diff:*),Bash(git show:*),Bash(git log:*),mcp__github_inline_comment__create_inline_comment" --disallowedTools "Edit,Write"'
