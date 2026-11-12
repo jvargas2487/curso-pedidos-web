@@ -34,7 +34,7 @@ public static class CalculoTotales
         var descuento = Redondear(baseDescuento * porcDescuento);
         var neto = subtotal - descuento;
         var flete = lineas.Count == 0 ? 0m : CalcularFlete(fleteBase, region);
-        var iva = Redondear((neto + flete) * tasaIva);
+        var iva = Redondear(neto * tasaIva);
 
         return new ResultadoTotales(
             subtotal,
