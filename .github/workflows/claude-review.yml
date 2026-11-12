@@ -35,5 +35,8 @@ jobs:
             Revisa el PR #${{ github.event.pull_request.number }} de ${{ github.repository }}.
             Lee las reglas desde main, no desde la rama: `git show origin/main:AGENTS.md` y `git show origin/main:REVIEW.md`.
             Revisa solo el cambio (`git diff origin/main...HEAD`) con REVIEW.md: qué es Importante, revisar siempre,
-            no reportar y el tope de hallazgos. Comenta en español, con archivo:línea.
-          claude_args: '--max-turns 8 --allowedTools "Read,Grep,Glob,Bash(git diff:*),Bash(git show:*),Bash(git log:*),mcp__github_inline_comment__create_inline_comment" --disallowedTools "Edit,Write"'
+            no reportar y el tope de hallazgos. Escribe en español, con archivo:línea.
+            Publica el resultado en el PR: un comentario inline por cada hallazgo y, siempre, un comentario
+            resumen con `gh pr comment ${{ github.event.pull_request.number }} --body "..."`
+            (si no hay nada Importante, el resumen lo dice en una línea).
+          claude_args: '--max-turns 10 --allowedTools "Read,Grep,Glob,Bash(git diff:*),Bash(git show:*),Bash(git log:*),Bash(gh pr comment:*),mcp__github_inline_comment__create_inline_comment" --disallowedTools "Edit,Write"'
