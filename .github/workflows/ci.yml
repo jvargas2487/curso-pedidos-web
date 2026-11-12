@@ -1,0 +1,34 @@
+# CI: compila y ejecuta los tests en cada push a main y en cada pull request.
+# Sin secretos: no los necesita. Las actions van fijadas por commit (SHA) con su versión en el comentario.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Permisos mínimos: el job solo lee el código.
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Instalar .NET
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          dotnet-version: 10.0.301
+
+      - name: Restaurar paquetes
+        run: dotnet restore
+
+      - name: Compilar
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Ejecutar tests
+        run: dotnet test --no-build --configuration Release
