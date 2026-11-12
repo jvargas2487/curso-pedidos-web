@@ -7,7 +7,7 @@ Borra estos comentarios al terminar.
 
 ## Preparación
 
-- **Tests en `Skip` (pendientes de unidades anteriores):** <ninguno, o cuáles y su motivo>
+- **Tests en `Skip` (pendientes de unidades anteriores):** ninguno (116 tests en verde, 0 omitidos).
 
 ## Etapa 1 · Tests que sí prueban
 
