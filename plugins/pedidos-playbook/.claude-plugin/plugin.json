@@ -1,0 +1,8 @@
+{
+  "name": "pedidos-playbook",
+  "version": "1.0.0",
+  "description": "Forma de trabajar con IA del equipo Pedidos Web: revisor de cambios, documentación de módulos, planificador de proyectos, guardián de secretos, plantilla de AGENTS.md y MCP de Claude Academy.",
+  "author": {
+    "name": "Jeffry Vargas"
+  }
+}
