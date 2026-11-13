@@ -1,0 +1,16 @@
+{
+  "name": "pedidos-jvargas2487",
+  "owner": {
+    "name": "Jeffry Vargas"
+  },
+  "metadata": {
+    "description": "Marketplace del equipo Pedidos Web con su playbook de trabajo con IA."
+  },
+  "plugins": [
+    {
+      "name": "pedidos-playbook",
+      "source": "./plugins/pedidos-playbook",
+      "description": "Forma de trabajar con IA del equipo Pedidos Web: revisor, documentación de módulos, planificador de proyectos, guardián de secretos, plantilla de AGENTS.md y MCP de Claude Academy."
+    }
+  ]
+}
