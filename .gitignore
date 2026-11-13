@@ -22,4 +22,5 @@ Thumbs.db
 
 # Material local del curso (no se versiona)
 *.pdf
+!docs/adopcion/plan-evolucion.pdf
 plan-taller-*.md

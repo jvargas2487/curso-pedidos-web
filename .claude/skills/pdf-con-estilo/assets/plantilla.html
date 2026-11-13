@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>{{TITULO}}</title>
+<style>
+  :root {
+    --color-principal: #1f3a5f;
+    --color-acento: #c8553d;
+    --color-texto: #1d2733;
+    --color-suave: #5b6675;
+    --color-fondo-tabla: #eef2f7;
+    --color-borde: #cfd7e2;
+  }
+  @page { size: A4; margin: 22mm 18mm 20mm 18mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--color-texto);
+    margin: 0;
+  }
+
+  /* Portada */
+  .portada {
+    height: 250mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 14mm;
+    border-left: 6mm solid var(--color-principal);
+    page-break-after: always;
+  }
+  .portada .etiqueta {
+    color: var(--color-acento);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 10pt;
+    margin-bottom: 8mm;
+  }
+  .portada h1 {
+    font-size: 30pt;
+    line-height: 1.15;
+    color: var(--color-principal);
+    margin: 0 0 6mm 0;
+    border: 0;
+    padding: 0;
+  }
+  .portada .subtitulo { font-size: 14pt; color: var(--color-suave); margin: 0 0 14mm 0; }
+  .portada .meta { font-size: 10.5pt; color: var(--color-suave); margin: 0; }
+
+  /* Contenido */
+  h1, h2, h3 { color: var(--color-principal); line-height: 1.25; page-break-after: avoid; }
+  h2 {
+    font-size: 16pt;
+    margin: 9mm 0 3mm 0;
+    padding-bottom: 1.5mm;
+    border-bottom: 2px solid var(--color-acento);
+  }
+  h3 { font-size: 12.5pt; margin: 6mm 0 2mm 0; }
+  p { margin: 0 0 3mm 0; }
+  ul, ol { margin: 0 0 3mm 0; padding-left: 6mm; }
+  li { margin-bottom: 1mm; }
+  a { color: var(--color-principal); }
+  strong { color: var(--color-texto); }
+  hr { border: 0; border-top: 1px solid var(--color-borde); margin: 6mm 0; }
+
+  code {
+    font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+    font-size: 9pt;
+    background: var(--color-fondo-tabla);
+    padding: 0.2mm 1.2mm;
+    border-radius: 1mm;
+  }
+  pre {
+    background: var(--color-fondo-tabla);
+    border-left: 3px solid var(--color-principal);
+    padding: 3mm;
+    white-space: pre-wrap;
+    page-break-inside: avoid;
+  }
+  pre code { background: none; padding: 0; }
+
+  blockquote {
+    margin: 0 0 3mm 0;
+    padding: 2mm 4mm;
+    border-left: 3px solid var(--color-acento);
+    background: #fbf2ef;
+    color: var(--color-suave);
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  /* Tablas */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2mm 0 5mm 0;
+    font-size: 9.5pt;
+  }
+  thead { display: table-header-group; }
+  th {
+    background: var(--color-principal);
+    color: #ffffff;
+    text-align: left;
+    padding: 2mm 2.5mm;
+    border: 1px solid var(--color-principal);
+  }
+  td { padding: 2mm 2.5mm; border: 1px solid var(--color-borde); vertical-align: top; }
+  tr { page-break-inside: avoid; }
+  tbody tr:nth-child(even) td { background: var(--color-fondo-tabla); }
+</style>
+</head>
+<body>
+  <section class="portada">
+    <div class="etiqueta">{{ETIQUETA}}</div>
+    <h1>{{TITULO}}</h1>
+    {{SUBTITULO}}
+    {{META}}
+  </section>
+  <main>
+{{CONTENIDO}}
+  </main>
+</body>
+</html>
