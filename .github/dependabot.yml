@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Paquetes NuGet de src/ y tests/ (Dependabot recorre los .csproj desde la raíz)
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Acciones usadas en .github/workflows/
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
